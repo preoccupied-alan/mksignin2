@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mama Kin Open Mic Signup</title>
+    <title>Sign Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -9,23 +9,14 @@
     <div class="logo">
         <img src="logo.png" alt="My Logo">
     </div>
-    <div id="password-prompt">
-        <h2>Enter Password:</h2>
-        <form id="password-form" onsubmit="handlePasswordSubmit(event)">
-            <input type="password" id="password-input" required>
-            <input type="submit" value="Submit">
-        </form>
-        <div id="password-error" style="display: none; color: red;">Invalid password. Please try again.</div>
-    </div>
-    <div id="sign-in" style="display: none;">
-        <h2>Sign In</h2>
-        <form id="sign-in-form" onsubmit="handleSignInSubmit(event)">
-            <input type="text" id="username" name="username" required>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Sign In">
+    <div id="signup-form">
+        <h2>Welcome</h2>
+        <p>Please enter the passcode to sign up:</p>
+        <form onsubmit="handleSignup(event)">
+            <input type="password" id="passcode-input" required>
+            <input type="submit" value="Sign Up">
         </form>
     </div>
     <script src="script.js"></script>
-    <script src="password.js"></script>
 </body>
 </html>
