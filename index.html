@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Page</title>
+    <title>Sign Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -9,15 +9,14 @@
     <div class="logo">
         <img src="logo.png" alt="My Logo">
     </div>
-    <div id="admin-content">
-        <h2>Admin Page</h2>
-        <p>Current Passcode: <span id="passcode"></span></p>
-        <button onclick="updatePasscode()">Update Passcode</button>
-        <button onclick="toggleListOrder()">Toggle List Order</button>
-        <button onclick="clearList()">Clear List</button>
-        <h3>List</h3>
-        <ul id="slot-list"></ul>
+    <div id="signup-form">
+        <h2>Welcome</h2>
+        <p>Please enter the passcode to sign up:</p>
+        <form onsubmit="handleSignup(event)">
+            <input type="password" id="passcode-input" required>
+            <input type="submit" value="Sign Up">
+        </form>
     </div>
-    <script src="admin.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
