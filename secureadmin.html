@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logo">
+        <img src="logo.png" alt="My Logo">
+    </div>
+    <div id="admin-passcode">
+        <h2>Passcode</h2>
+        <div id="passcode-display"></div>
+        <button id="passcode-update-btn" onclick="togglePasscodeUpdateForm()">Update Passcode</button>
+        <form id="passcode-update-form" style="display: none;" onsubmit="handlePasscodeUpdate(event)">
+            <input type="password" id="passcode-input" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div id="admin-list">
+        <h2>List of Slots</h2>
+        <button onclick="toggleListOrder()">Toggle List Order</button>
+        <button onclick="clearList()">Clear List</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Slot</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody id="slot-list">
+                <!-- Slots and names will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+    <script src="admin.js"></script>
+    <script src="password.js"></script>
+</body>
+</html>
