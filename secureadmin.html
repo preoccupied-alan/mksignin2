@@ -2,39 +2,47 @@
 <html>
 <head>
     <title>Admin Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-    <div class="logo">
-        <img src="logo.png" alt="My Logo">
+    <div class="container">
+        <h1>Admin Page</h1>
+
+        <h1 id="password"></h1>
+
+        <table id="signup-table"></table>
+
+        <textarea id="notes" rows="4" placeholder="Enter notes and additional changes"></textarea>
     </div>
-    <div id="admin-passcode">
-        <h2>Passcode</h2>
-        <div id="passcode-display"></div>
-        <button id="passcode-update-btn" onclick="togglePasscodeUpdateForm()">Update Passcode</button>
-        <form id="passcode-update-form" style="display: none;" onsubmit="handlePasscodeUpdate(event)">
-            <input type="password" id="passcode-input" required>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
-    <div id="admin-list">
-        <h2>List of Slots</h2>
-        <button onclick="toggleListOrder()">Toggle List Order</button>
-        <button onclick="clearList()">Clear List</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>Slot</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody id="slot-list">
-                <!-- Slots and names will be dynamically added here -->
-            </tbody>
-        </table>
-    </div>
+
     <script src="admin.js"></script>
-    <script src="password.js"></script>
 </body>
 </html>

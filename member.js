@@ -1,37 +1,43 @@
-// Function to fetch the slot data and update the member list
-function fetchSlots() {
-    // Simulate fetching the slot data from the server
-    // Replace this with your actual AJAX request to retrieve the slot data
-    setTimeout(() => {
-        const slotsData = [
-            { slot: 1, name: "John Doe" },
-            { slot: 2, name: "Jane Smith" },
-            { slot: 3, name: "Mike Johnson" },
-            // ... add more slot data here ...
-        ];
-
-        // Get the slot list tbody element
-        const slotList = document.getElementById("slot-list");
-
-        // Clear the existing slot list
-        slotList.innerHTML = "";
-
-        // Iterate through the slots data and create table rows
-        slotsData.forEach((slotData) => {
-            const row = document.createElement("tr");
-            const slotCell = document.createElement("td");
-            const nameCell = document.createElement("td");
-
-            slotCell.textContent = slotData.slot;
-            nameCell.textContent = slotData.name;
-
-            row.appendChild(slotCell);
-            row.appendChild(nameCell);
-
-            slotList.appendChild(row);
-        });
-    }, 1000);
-}
-
-// Call the fetchSlots function to populate the member list on page load
-window.onload = fetchSlots;
+// Function to fetch the signup list from signup.json
+async function fetchSignupList() {
+    try {
+      const response = await fetch('signup.json');
+      if (!response.ok) {
+        throw new Error('Failed to fetch signup list');
+      }
+      const list = await response.json();
+      return list;
+    } catch (error) {
+      console.error('Error fetching signup list:', error);
+      alert('An error occurred while fetching the signup list.');
+    }
+  }
+  
+  // Function to display the signup list as a table
+  function displaySignupList(signupList) {
+    const signupTable = document.getElementById('signup-table');
+    signupTable.innerHTML = '';
+  
+    const tableHeader = signupTable.createTHead();
+    const headerRow = tableHeader.insertRow();
+    const headerCell1 = headerRow.insertCell();
+    const headerCell2 = headerRow.insertCell();
+    headerCell1.textContent = 'Slot';
+    headerCell2.textContent = 'Name';
+  
+    const tableBody = signupTable.createTBody();
+    signupList.forEach(([slot, name]) => {
+      const row = tableBody.insertRow();
+      const cell1 = row.insertCell();
+      const cell2 = row.insertCell();
+      cell1.textContent = slot;
+      cell2.textContent = name || '-';
+    });
+  }
+  
+  // Main script
+  document.addEventListener('DOMContentLoaded', async () => {
+    const signupList = await fetchSignupList();
+    displaySignupList(signupList);
+  });
+  

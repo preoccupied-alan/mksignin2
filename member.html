@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Performer list</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <title>Member Page</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-    <div class="logo">
-        <img src="logo.png" alt="My Logo">
+    <div class="container">
+        <h1>Member Page</h1>
+
+        <table id="signup-table"></table>
     </div>
-    <div id="member-list">
-        <h2>Current Order of the List</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Slot</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody id="slot-list">
-                <!-- Slots and names will be dynamically added here -->
-            </tbody>
-        </table>
-    </div>
+
     <script src="member.js"></script>
 </body>
 </html>
