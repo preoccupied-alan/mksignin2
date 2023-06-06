@@ -1,76 +1,53 @@
-// Function to handle slot sign-up
-async function handleSignup(event) {
-    event.preventDefault();
-  
-    const passcodeInput = document.getElementById("passcode-input");
-    const passcode = passcodeInput.value;
-  
+// Function to fetch the password from password.txt
+async function fetchPassword() {
     try {
-      // Perform passcode check
-      const passcodeResponse = await fetch('password.txt');
-      if (!passcodeResponse.ok) {
-        throw new Error('Failed to fetch passcode');
-      }
-      const correctPasscode = await passcodeResponse.text().trim();
-  
-      if (passcode !== correctPasscode) {
-        alert('Incorrect passcode. Please try again.');
-        return;
-      }
-  
-      // Continue with slot sign-up process
-      const slotSelect = document.getElementById("slots");
-      const selectedSlot = slotSelect.value;
-      const userNameInput = document.getElementById("name-input");
-      const userName = userNameInput.value;
-  
-      // Fetch existing list data
-      const response = await fetch('listdata.json');
+      const response = await fetch('password.txt');
       if (!response.ok) {
-        throw new Error('Failed to fetch list data');
+        throw new Error('Failed to fetch password');
       }
-      const data = await response.json();
-  
-      // Check if the slot is already taken
-      const slotIndex = data.findIndex(slot => slot.slot === selectedSlot);
-      if (slotIndex !== -1) {
-        alert("This slot is already taken. Please select another slot.");
-        return;
-      }
-  
-      // Add the new slot to the list
-      const slot = { slot: selectedSlot, name: userName };
-      data.push(slot);
-  
-      // Save the updated list data
-      await saveListData(data);
-  
-      // Update the list item with the user's name
-      const listItem = document.getElementById(`slot-${selectedSlot}`);
-      listItem.textContent = `${selectedSlot}: ${userName}`;
-  
-      // Clear the form inputs
-      slotSelect.value = "";
-      userNameInput.value = "";
-      passcodeInput.value = "";
+      const password = await response.text();
+      return password.trim();
     } catch (error) {
-      console.error('Error signing up:', error);
-      alert('An error occurred. Please try again.');
+      console.error('Error fetching password:', error);
+      alert('An error occurred while fetching the password.');
     }
   }
   
-  // Function to save the list data to the JSON file
-  async function saveListData(data) {
-    const response = await fetch('save-list.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+  // Function to perform the signup process
+  function performSignup(password, list) {
+    const enteredPassword = prompt('Please enter the password:');
   
-    if (!response.ok) {
-      throw new Error('Failed to save list data');
+    if (enteredPassword === password) {
+      const availableSlots = list.reduce((slots, slot, index) => {
+        if (slot[1] === null) {
+          slots.push(index);
+        }
+        return slots;
+      }, []);
+  
+      if (availableSlots.length > 0) {
+        const name = prompt('Please enter your name:');
+        const selectedSlot = prompt('Please select a slot number:\nAvailable Slots: ' + availableSlots.join(', '));
+  
+        if (selectedSlot !== null && availableSlots.includes(parseInt(selectedSlot))) {
+          const slotIndex = parseInt(selectedSlot);
+          list[slotIndex][1] = name;
+          alert(`Signup successful!\nYou have been assigned to Slot ${slotIndex + 1}`);
+        } else {
+          alert('Invalid slot selection.');
+        }
+      } else {
+        alert('No available slots.');
+      }
+    } else {
+      alert('Invalid password.');
     }
   }
+  
+  // Main script
+  document.addEventListener('DOMContentLoaded', async () => {
+    const password = await fetchPassword();
+    const list = []; // Replace with your code to fetch the signup list from signup.json
+    performSignup(password, list);
+  });
   
