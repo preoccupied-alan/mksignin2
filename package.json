@@ -1,0 +1,19 @@
+{
+  "name": "mksignin2",
+  "version": "1.0.0",
+  "description": "sign in app for mama kin open mic",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/preoccupied-alan/mksignin2.git"
+  },
+  "author": "alan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/preoccupied-alan/mksignin2/issues"
+  },
+  "homepage": "https://github.com/preoccupied-alan/mksignin2#readme"
+}
